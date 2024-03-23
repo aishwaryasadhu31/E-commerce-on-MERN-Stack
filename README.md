@@ -12,12 +12,12 @@
 
 <h3>Features:</h3>
 <ul>
-<li Node provides the backend environment for this application />
-<li Express middleware is used to handle requests, routes />
-<li Mongoose schemas to model the application data />
-<li React for displaying UI components />
-<li Redux to manage application's state />
-<li Redux Thunk middleware to handle asynchronous redux actions />
+<li> Node provides the backend environment for this application </li>
+<li> Express middleware is used to handle requests, routes </li>
+<li> Mongoose schemas to model the application data </li>
+<li> React for displaying UI components </li>
+<li> Redux to manage application's state </li>
+<li> Redux Thunk middleware to handle asynchronous redux actions </li>
 </ul>
 </p>
 </div>
