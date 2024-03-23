@@ -5,9 +5,9 @@
 <p>
   An ecommerce store built with MERN stack, and utilizes third party API's. This ecommerce store enable three main different flows or implementations:
 <li>
- <ul>Buyers browse the store categories, products and brands </ul>
-<ul>Sellers or Merchants manage their own brand component </ul>
-<ul>Admins manage and control the entire store components</ul>
+ <ol>Buyers browse the store categories, products and brands 
+     Sellers or Merchants manage their own brand component 
+     Admins manage and control the entire store components</ol>
 </li>
 
 features:
