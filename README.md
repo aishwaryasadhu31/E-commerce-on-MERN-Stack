@@ -10,13 +10,15 @@
   <li> Admins manage and control the entire store components</li>
 </ol>
 
-features:
-Node provides the backend environment for this application
-Express middleware is used to handle requests, routes
-Mongoose schemas to model the application data
-React for displaying UI components
-Redux to manage application's state
-Redux Thunk middleware to handle asynchronous redux actions
+<h3>Features:</h3>
+<ul>
+<li Node provides the backend environment for this application />
+<li Express middleware is used to handle requests, routes />
+<li Mongoose schemas to model the application data />
+<li React for displaying UI components />
+<li Redux to manage application's state />
+<li Redux Thunk middleware to handle asynchronous redux actions />
+</ul>
 </p>
 </div>
 
