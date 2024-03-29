@@ -1,10 +1,9 @@
 import Product from "../models/product.js"
 import slug from "slugify"
 import asyncHandler from "express-async-handler"
-//import ErrorHandler from "../middleware/errorHandler.js"
-//import catchAsyncError from "../middleware/catchAsyncError.js"
 import { validateId } from "../utils/validateId.js"
-//import { errorHandler } from "../middleware/errorHandler.js"
+
+
 
 //create a new single products
 //api/admin/products
@@ -145,7 +144,7 @@ if (validate)
         product =await Product.findByIdAndDelete(req.params.id,{new:true})
 
         res.status(200).json({
-            product,
+            message: "Product Deleted"
         })
     }
 }

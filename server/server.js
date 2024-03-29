@@ -12,18 +12,13 @@ import productRoute from "./routes/products.js"
 //initialising express  
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 dotenv.config({ path: "server/config/config.env" });
 
 ///database connection
 connectionDb();
 app.use(morgan('dev'))
 
-
-//initial get request
-// app.get('/', (req, res) => {
-//     res.send('I Love You Babu')
-//   })
 app.use(express.json());
 
 
