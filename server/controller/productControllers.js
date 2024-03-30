@@ -2,6 +2,7 @@ import Product from "../models/product.js"
 import slug from "slugify"
 import asyncHandler from "express-async-handler"
 import { validateId } from "../utils/validateId.js"
+import ApiFilter from "../utils/apiFilters.js"
 
 
 
