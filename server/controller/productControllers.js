@@ -33,17 +33,34 @@ catch(err){
 
 export const getProducts= asyncHandler(async(req,res)=>{
     try{
-        const allProducts=await Product.find();
+        const apiFilter= new ApiFilter(Product,req.query).search().filters();
+        let products=await apiFilter.query
+        let productLen=products.length;
+        const prodPerPage=4;
+        if(productLen===0)
+        {
+            res.status(200).json({
+                message:`No Products found with the keyword ${req.query.keyword}`
+            })
+        }
+        apiFilter.pagination(prodPerPage);
+        products=await apiFilter.query.clone();
         res.status(200).json({
-            allProducts,
+            prodPerPage,
+            productLen,
+            products,
         })
+       
+        // const allProducts=await Product.find();
+        // res.status(200).json({
+        //     allProducts,
+        // })
     }
     catch(err)
     {
         throw new Error(err);
     }
 })
-
 
 //get single product details with :id
 //api/allproducts/:id
