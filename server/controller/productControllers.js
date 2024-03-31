@@ -14,6 +14,7 @@ import ApiFilter from "../utils/apiFilters.js"
     {
         req.body.slug = slug(req.body.name)
     }
+    req.body.user = req.user._id
 
     const newProduct = await Product.create(req.body)
     res.status(200).json({

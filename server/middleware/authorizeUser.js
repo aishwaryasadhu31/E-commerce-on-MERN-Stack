@@ -15,3 +15,20 @@ export const isauthenticated = asynchandler(async(req,res,next) => {
     next();
 
 })
+
+export const checkRoles = (...roles) => {
+    return (req, res, next) => {
+        if(roles.includes(req.user.role))
+        {
+            next();
+        }
+        else{
+            return next(
+                res.status(403).json({
+                    error: "Only admin can access this"
+                })
+            )
+
+        }
+    }
+}
