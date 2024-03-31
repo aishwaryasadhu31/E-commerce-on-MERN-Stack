@@ -171,3 +171,5 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
   cookie(user, 200, res);
 });
+
+

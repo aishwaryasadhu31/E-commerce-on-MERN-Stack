@@ -7,5 +7,6 @@ router.route("/login").post(loginUser);
 router.route("/logout").get(logoutUser);
 router.route("/forgotPassword").post(forgotPassword);
 router.route("/password/resetPassword").put(resetPassword);
+//router.route ("/profile").get(profileUser);
 
 export default router;
