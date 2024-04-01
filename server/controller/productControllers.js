@@ -175,3 +175,159 @@ else{
     })
 }
 })
+
+
+//review product
+// api/reviews
+
+export const createReview = asyncHandler(async(req,res,next) => {
+    const {rating, comment, productId} = req.body
+    let validate = true
+    validate = validateId(productId)
+
+    if(validate)
+    {
+    const review = {user: req.user._id, rating: Number(rating), comment}
+    const product = await Product.findById(productId)
+    if(!product){
+        res.status(404).json({
+            error: "Product not found"
+        })
+    }
+   // let isReviewed = false
+    let isReviewed = false
+    const validate = product.reviews.forEach((r) => {
+        if(r.user.toString() === req.user._id.toString()){
+        isReviewed = true;}
+    else{
+        isReviewed = false;}
+    })
+
+    if(isReviewed){
+        product.reviews.forEach((rv) => {
+            if(rv.user.toString() === req.user._id.toString())
+            {
+                rv.comment = comment
+                rv.rating = rating
+            }
+        })
+        
+
+    }
+
+    else{
+        product.reviews.push(review)
+        product.numOfReviews = product.reviews.length
+    }
+
+let count = 0;
+product.reviews.forEach((r) => {
+    if (!isNaN(parseInt(r.rating))) {
+        count += parseInt(r.rating);
+    }
+});
+
+if (product.reviews.length > 0) {
+    product.ratings = count / product.reviews.length;
+} else {
+    product.ratings = 0; // or any default value you prefer
+}
+
+        await product.save({validateBeforeSave: false})
+
+        res.status(200).json({
+            success: true,
+            message: "Your review is posted",
+            review
+        })
+    }
+    else{
+        res.status(400).json({
+            error: "Invalid ID"
+        })
+    }
+})
+
+//get product reviews
+// api/reviews?id
+
+export const getAllReviews = asyncHandler(async(req,res,next) => {
+
+    let validate = true
+    validate = validateId(req.query.id)
+
+    if(validate){
+    const product = await Product.findById(req.query.id)
+
+    if(!product){
+        res.status(404).json({
+            error: "Product not found"
+        })
+    }
+    const reviewCount = product.reviews.length
+    const ratings = product.ratings
+     res.status(200).json({
+        success: true,
+        message: "Here are the reviews of this product",
+        reviewCount,
+        ratings,
+        reviews: product.reviews
+     })
+    }
+    else{
+        res.status(404).json({
+            error: "Invalid Id"
+        })
+    }
+})
+
+//delete review from admin
+// api/admin/review
+
+export const deleteReview = asyncHandler(async(req,res,next) => {
+    let product = await Product.findById(req.query.productId)
+    if(!product){
+     res.status(404).json({
+            error: "Product not found"
+        })
+    }
+    // const reviews = product.reviews.filter((review) => {
+    //    review._id.toString() !== req.query.id
+    // })
+    let reviews = product.reviews
+    product.reviews.forEach(async(r)=> {
+        if(r._id.toString()===req.query.id.toString()){
+            r.deleteOne()
+           // await product.reviews.findByIdAndDelete(req.query.id.toString())
+        }
+    })
+
+    const numOfReviews = product.reviews.length
+
+    let count = 0;
+product.reviews.forEach((r) => {
+    if (!isNaN(parseInt(r.rating))) {
+        count += parseInt(r.rating);
+    }
+});
+
+if (product.reviews.length > 0) {
+    product.ratings = count / product.reviews.length;
+} else {
+    product.ratings = 0; // or any default value you prefer
+}
+const ratings = product.ratings
+reviews = product.reviews
+//product = await Product.findByIdAndUpdate(req.query.productId, {reviews,numOfReviews,ratings}, {new: true})
+
+await product.save({ validateBeforeSave: false})
+res.status(200).json({
+    success: true,
+    message: "Here are the updated reviews of this product",
+    numOfReviews,
+    ratings,
+    reviews,
+
+ })
+
+})
