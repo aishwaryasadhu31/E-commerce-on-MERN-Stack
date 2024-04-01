@@ -5,10 +5,11 @@ import connectionDb from "./config/connection.js";
 import morgan from "morgan"
 import productRoute from "./routes/products.js"
 import userRoute from "./routes/users.js"
-import user from "./models/user.js";
+//import user from "./models/user.js";
 import cookie from "./utils/cookie.js";
 import cookieParser from "cookie-parser"
 import profileRoute from "./routes/profile.js"
+import orderRoute from "./routes/order.js"
 
 
 
@@ -34,6 +35,7 @@ app.use(cookieParser());
 
   app.use("/api",profileRoute)
 
+  app.use("/api",orderRoute)
 
   //express Listening
 
