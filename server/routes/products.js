@@ -5,11 +5,11 @@ const router =express.Router();
 import { isauthenticated, checkRoles } from "../middleware/authorizeUser.js";
 
 
- router.route("/admin/products").post(isauthenticated, checkRoles("admin"), createProduct);
- router.route("/allproducts").get(isauthenticated,checkRoles("admin"), getProducts);
- router.route("/allproducts/:id").get(isauthenticated,checkRoles("admin"), productDetails);
- router.route("/allproducts/:id").put(isauthenticated,checkRoles("admin"), updateProduct);
- router.route("/allproducts/:id").delete(isauthenticated,checkRoles("admin"), deleteProduct);
+ router.route("/admin/products").post( createProduct);
+ router.route("/allproducts").get( getProducts);
+ router.route("/allproducts/:id").get(productDetails);
+ router.route("/allproducts/:id").put(updateProduct);
+ router.route("/allproducts/:id").delete(deleteProduct);
 
 
  //review routes

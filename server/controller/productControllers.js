@@ -291,14 +291,11 @@ export const deleteReview = asyncHandler(async(req,res,next) => {
             error: "Product not found"
         })
     }
-    // const reviews = product.reviews.filter((review) => {
-    //    review._id.toString() !== req.query.id
-    // })
+   
     let reviews = product.reviews
     product.reviews.forEach(async(r)=> {
         if(r._id.toString()===req.query.id.toString()){
             r.deleteOne()
-           // await product.reviews.findByIdAndDelete(req.query.id.toString())
         }
     })
 
@@ -318,7 +315,7 @@ if (product.reviews.length > 0) {
 }
 const ratings = product.ratings
 reviews = product.reviews
-//product = await Product.findByIdAndUpdate(req.query.productId, {reviews,numOfReviews,ratings}, {new: true})
+
 
 await product.save({ validateBeforeSave: false})
 res.status(200).json({
