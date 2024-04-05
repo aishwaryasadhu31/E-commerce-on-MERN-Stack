@@ -6,7 +6,7 @@ import { isauthenticated, checkRoles } from "../middleware/authorizeUser.js";
 
 
  router.route("/admin/products").post( createProduct);
- router.route("/allproducts").get( getProducts);
+ router.route("/allproducts").get(getProducts);
  router.route("/allproducts/:id").get(productDetails);
  router.route("/allproducts/:id").put(updateProduct);
  router.route("/allproducts/:id").delete(deleteProduct);

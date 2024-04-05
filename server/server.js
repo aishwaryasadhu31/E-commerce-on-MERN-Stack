@@ -24,7 +24,7 @@ dotenv.config({ path: "server/config/config.env" });
 connectionDb();
 app.use(morgan('dev'))
 
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
 

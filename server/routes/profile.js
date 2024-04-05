@@ -4,8 +4,8 @@ import { checkRoles, isauthenticated } from "../middleware/authorizeUser.js";
 const router = express.Router();
 
 router.route ("/profile").get(isauthenticated, profileUser);
-router.route ("/updateProfile").post(isauthenticated, updateProfile);
-router.route ("/updatePassword").post(isauthenticated, updatePassword);
+router.route ("/updateProfile").put(isauthenticated, updateProfile);
+router.route ("/updatePassword").put(isauthenticated, updatePassword);
 
 //Admin
 router.route ("/admin/allusers").get(isauthenticated, checkRoles("admin"), allUsers);
