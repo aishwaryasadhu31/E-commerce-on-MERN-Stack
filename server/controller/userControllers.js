@@ -5,6 +5,8 @@ import cookie from "../utils/cookie.js"
 import { getResetPasswordTemplate } from "../utils/emailTemplates.js"
 import sendEmail from "../utils/sendEmail.js"
 import crypto from "crypto"
+import { uploadFile, delete_file } from "../utils/cloudinary.js"
+import exp from "constants"
 
 //creating Register User
 // api/register
@@ -172,4 +174,20 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
   cookie(user, 200, res);
 });
 
+
+//upload avatar in profile
+
+export const uploadAvatar = asyncHandler(async(req,res,next) => {
+    const avatar = await uploadFile (req.body.avatar, "Home/avatar")
+    if(req.user.avatar.url)
+    {
+        await delete_file(req.user.avatar.public_id)
+    }
+    const user = await User.findByIdAndUpdate(req.user._id, {avatar: avatar})
+
+    res.status(200).json({
+        message: "Avatar uploaded successfully",
+        user
+    })
+})
 
